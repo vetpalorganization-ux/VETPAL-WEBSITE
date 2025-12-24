@@ -39,3 +39,42 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Build and development documentation
+00_START_HERE.md
+PHASE_*.md
+DEPLOYMENT_STRATEGY.md
+FILES_AND_GUIDE.md
+FILE_MIGRATION_STRATEGY.md
+GITHUB_AND_HOSTING_SETUP.md
+GITHUB_PUSH_INSTRUCTIONS.md
+SETUP_SUMMARY.md
+VETPAL_DOCUMENTATION_INDEX.md
+YOUR_PATH_FORWARD.md
+START_CODING_NOW.md
+
+# VS Code configuration
+.vscode/
+
+# Development files
+vite.config.ts
+index.html
+src/main.tsx
+src/App.tsx
+src/App.css
+src/index.css
+src/vite-env.d.ts
+src/pages/
+
+# Distribution files
+dist/
+
+# Environment and local files
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
