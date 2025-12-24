@@ -133,7 +133,10 @@ export function Header() {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3">
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/login">Sign In</Link>
+              <Link to="/sign-in">Sign In</Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/create-account">Create Account</Link>
             </Button>
             <Button variant="accent" size="default" asChild>
               <Link to="/donate" className="flex items-center gap-2">
@@ -187,7 +190,10 @@ export function Header() {
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border mt-2">
                 <Button variant="outline" asChild className="w-full">
-                  <Link to="/login">Sign In</Link>
+                  <Link to="/sign-in">Sign In</Link>
+                </Button>
+                <Button variant="outline" asChild className="w-full">
+                  <Link to="/create-account">Create Account</Link>
                 </Button>
                 <Button variant="accent" asChild className="w-full">
                   <Link to="/donate" className="flex items-center justify-center gap-2">
