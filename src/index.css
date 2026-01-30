@@ -1,9 +1,9 @@
+/* VETPAL Design System - Deep Ocean Professional Theme */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* VETPAL Design System - Deep Ocean Professional Theme */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -83,7 +83,7 @@
     --sidebar-ring: 168 80% 40%;
   }
 
-  .light {
+  [data-theme="light"] {
     --background: 210 40% 98%;
     --foreground: 222 47% 11%;
 

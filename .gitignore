@@ -68,3 +68,7 @@ dist/
 .AppleDouble
 .LSOverride
 Thumbs.db
+
+# Ignored non-build files
+ignore/
+

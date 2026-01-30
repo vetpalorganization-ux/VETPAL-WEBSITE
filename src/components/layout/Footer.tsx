@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const footerLinks = {
   organization: [
@@ -34,25 +35,27 @@ const footerLinks = {
     { name: 'Donate', href: '/donate' },
     { name: 'Partner', href: '/get-involved#partner' },
     { name: 'Corporate Giving', href: '/get-involved#corporate' },
-    { name: 'Fundraise', href: '/fundraise' },
+    { name: 'Fundraise', href: '/donate' },
   ],
   resources: [
     { name: 'News & Stories', href: '/news' },
     { name: 'FAQs', href: '/faq' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Press Kit', href: '/press' },
   ],
 };
 
 const socialLinks = [
-  { name: 'Facebook', icon: Facebook, href: '#' },
-  { name: 'Twitter', icon: Twitter, href: '#' },
-  { name: 'Instagram', icon: Instagram, href: '#' },
-  { name: 'LinkedIn', icon: Linkedin, href: '#' },
-  { name: 'YouTube', icon: Youtube, href: '#' },
+  { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/vetpal' },
+  { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/vetpal' },
+  { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/vetpal' },
+  { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/vetpal' },
+  { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/vetpal' },
 ];
 
 export function Footer() {
+  const { theme } = useTheme();
+  const logoBase = `/assets/branding/logos/${theme}`;
+
   return (
     <footer className="bg-card border-t border-border">
       {/* Newsletter Section */}
@@ -97,17 +100,12 @@ export function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-gradient-ocean flex items-center justify-center shadow-glow">
-                <span className="text-2xl font-bold text-accent">V</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-heading font-bold text-xl text-foreground">
-                  VETPAL
-                </span>
-                <span className="text-xs text-muted-foreground tracking-wider uppercase">
-                  Veterans Empowered To Protect Aquatic Life
-                </span>
-              </div>
+              <img
+                src={`${logoBase}/header.png`}
+                alt="VETPAL – Veterans Empowered To Protect Aquatic Life"
+                className="h-12 w-auto object-contain drop-shadow-sm"
+                loading="lazy"
+              />
             </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
               Empowering veterans through meaningful marine conservation work. 

@@ -1,3 +1,11 @@
+/**
+ * VETPAL About Page
+ *
+ * CRITICAL GUARDRAIL: Do not fabricate or infer historical facts for VETPAL.
+ * All historical content must be explicitly approved. No AI-generated timelines,
+ * milestones, dates, or historical narratives may be added without verification.
+ */
+
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
@@ -37,38 +45,29 @@ const values = [
 
 const team = [
   {
-    name: 'Commander Sarah Chen',
-    role: 'Executive Director',
-    branch: 'U.S. Navy (Ret.)',
-    bio: '25 years of service, passionate about marine conservation since childhood.',
+    name: 'Brenden Wing',
+    role: 'Chief Executive Officer',
+    branch: 'U.S. Army Veteran',
+    bio: 'Founder and Army veteran dedicated to empowering fellow veterans through mission-driven environmental conservation and community impact.',
   },
   {
-    name: 'Sergeant Major Michael Torres',
-    role: 'Programs Director',
-    branch: 'U.S. Marine Corps (Ret.)',
-    bio: 'Combat veteran turned environmental advocate and certified dive instructor.',
+    name: 'Jim Hardying',
+    role: 'Chief Financial Officer',
+    branch: '',
+    bio: 'Oversees financial strategy, compliance, and sustainability to ensure VETPAL\'s long-term mission success.',
   },
   {
-    name: 'Dr. Emily Nakamura',
-    role: 'Chief Science Officer',
-    branch: 'Marine Biologist',
-    bio: 'PhD in Marine Ecology, leads our conservation research initiatives.',
+    name: 'David Oakey',
+    role: 'Chief Operating Officer',
+    branch: '',
+    bio: 'Leads operations, program execution, and organizational growth to support veterans and conservation initiatives.',
   },
   {
-    name: 'Captain David Williams',
-    role: 'Veterans Outreach',
-    branch: 'U.S. Army (Ret.)',
-    bio: 'Specializes in veteran mental health and transition support.',
+    name: 'Heather Wing',
+    role: 'Director of Development',
+    branch: '',
+    bio: 'Drives fundraising, partnerships, and donor engagement to expand VETPAL\'s impact and reach.',
   },
-];
-
-const timeline = [
-  { year: '2019', title: 'Founded', description: 'VETPAL established by a group of veteran divers in San Diego.' },
-  { year: '2020', title: 'First Program', description: 'Launched our inaugural veterans conservation training program.' },
-  { year: '2021', title: 'Expansion', description: 'Expanded to 10 coastal locations across California and Florida.' },
-  { year: '2022', title: 'Recognition', description: 'Received national recognition for veteran wellness outcomes.' },
-  { year: '2023', title: 'Growth', description: 'Served over 2,000 veterans and removed 50,000 lbs of ocean debris.' },
-  { year: '2024', title: 'Today', description: 'Operating in 25 locations with plans for international expansion.' },
 ];
 
 export default function AboutPage() {
@@ -113,18 +112,17 @@ export default function AboutPage() {
             
             <div className="space-y-4 text-muted-foreground">
               <p>
-                VETPAL was founded in 2019 by a group of Navy veterans who discovered the healing 
-                power of ocean conservation during their own transitions to civilian life.
+                VETPAL was founded in September 2024 by a group of Army veterans who discovered the healing
+                power of waterways conservation during their own transitions to civilian life.
               </p>
               <p>
-                What began as informal beach cleanups among friends quickly grew into a movement. 
-                We saw firsthand how meaningful environmental work could help veterans process 
-                trauma, build new skills, and find community.
+                What began as a vision for meaningful environmental work quickly grew into action.
+                We recognized how purpose-driven conservation work could help veterans build new skills,
+                find purpose, and create community.
               </p>
               <p>
-                Today, VETPAL operates across 25 coastal locations, providing paid positions, 
-                volunteer opportunities, and professional certifications to thousands of veterans 
-                each year while making measurable impact on marine ecosystems.
+                Today, VETPAL operates across 7 waterways, providing volunteer opportunities
+                and meaningful engagement while making measurable impact on aquatic ecosystems.
               </p>
             </div>
 
@@ -145,8 +143,8 @@ export default function AboutPage() {
             </div>
             
             <div className="absolute -bottom-6 -right-6 glass-card p-6 max-w-[200px]">
-              <div className="font-heading text-3xl font-bold text-accent mb-1">5 Years</div>
-              <div className="text-sm text-muted-foreground">of transforming lives and oceans</div>
+              <div className="font-heading text-3xl font-bold text-accent mb-1">Est. 2024</div>
+              <div className="text-sm text-muted-foreground">transforming lives and waterways</div>
             </div>
           </div>
         </div>
@@ -186,53 +184,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline Section */}
-      <section className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
-            <span className="w-2 h-2 rounded-full bg-accent" />
-            Our Journey
-          </div>
-          
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Growing Our Impact
-          </h2>
-        </div>
-
-        <div className="relative max-w-4xl mx-auto">
-          {/* Timeline Line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-border" />
-          
-          <div className="space-y-12">
-            {timeline.map((item, index) => (
-              <div 
-                key={index} 
-                className={`relative flex items-center gap-8 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-              >
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'} pl-12 md:pl-0`}>
-                  <div className="glass-card p-6">
-                    <div className="font-heading text-2xl font-bold text-accent mb-2">
-                      {item.year}
-                    </div>
-                    <h3 className="font-heading font-semibold text-foreground mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Timeline Dot */}
-                <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full bg-accent transform -translate-x-1/2 ring-4 ring-background" />
-                
-                <div className="hidden md:block flex-1" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Team Section */}
       <section id="team" className="section-container bg-card">
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -246,7 +197,7 @@ export default function AboutPage() {
           </h2>
           
           <p className="text-lg text-muted-foreground">
-            Our leadership team brings decades of military and conservation experience.
+            Our leadership team is dedicated to empowering veterans through conservation.
           </p>
         </div>
 
@@ -262,7 +213,7 @@ export default function AboutPage() {
                 {member.name}
               </h3>
               <p className="text-accent text-sm font-medium mb-1">{member.role}</p>
-              <p className="text-muted-foreground text-xs mb-3">{member.branch}</p>
+              {member.branch && <p className="text-muted-foreground text-xs mb-3">{member.branch}</p>}
               <p className="text-muted-foreground text-sm">{member.bio}</p>
             </div>
           ))}
@@ -283,20 +234,20 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="font-heading text-4xl md:text-5xl font-bold text-accent mb-2">2,547</div>
+              <div className="font-heading text-4xl md:text-5xl font-bold text-accent mb-2">170+</div>
               <div className="text-foreground/80">Veterans Served</div>
             </div>
             <div className="text-center">
-              <div className="font-heading text-4xl md:text-5xl font-bold text-accent mb-2">98%</div>
-              <div className="text-foreground/80">Report Improved Wellness</div>
+              <div className="font-heading text-4xl md:text-5xl font-bold text-accent mb-2">18</div>
+              <div className="text-foreground/80">Waterways Cleaned</div>
             </div>
             <div className="text-center">
-              <div className="font-heading text-4xl md:text-5xl font-bold text-accent mb-2">75K</div>
+              <div className="font-heading text-4xl md:text-5xl font-bold text-accent mb-2">13K+</div>
               <div className="text-foreground/80">Lbs Debris Removed</div>
             </div>
             <div className="text-center">
-              <div className="font-heading text-4xl md:text-5xl font-bold text-accent mb-2">342</div>
-              <div className="text-foreground/80">Certifications Earned</div>
+              <div className="font-heading text-4xl md:text-5xl font-bold text-accent mb-2">90+</div>
+              <div className="text-foreground/80">Cleanup Events</div>
             </div>
           </div>
         </div>

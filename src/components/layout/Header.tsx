@@ -1,8 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, ChevronDown } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, Heart, ChevronDown, LogOut, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { ThemeToggle } from './ThemeToggle';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -35,6 +45,7 @@ const navigation = [
     ]
   },
   { name: 'News', href: '/news' },
+  { name: 'Careers', href: '/careers' },
   { name: 'Contact', href: '/contact' },
 ];
 
@@ -43,6 +54,14 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+  const { theme } = useTheme();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,6 +76,9 @@ export function Header() {
     setActiveDropdown(null);
   }, [location]);
 
+  const logoTheme = theme === 'dark' ? 'light' : 'dark'; // use light logo on dark backgrounds, dark logo on light
+  const logoBase = `/assets/branding/logos/${logoTheme}`;
+
   return (
     <header
       className={cn(
@@ -70,17 +92,16 @@ export function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-ocean flex items-center justify-center shadow-glow group-hover:scale-105 transition-transform">
-              <span className="text-xl font-bold text-accent">V</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-heading font-bold text-lg text-foreground tracking-tight">
-                VETPAL
-              </span>
-              <span className="text-[10px] text-muted-foreground tracking-wider uppercase">
-                Protecting Aquatic Life
-              </span>
-            </div>
+            <picture>
+              <source media="(max-width: 640px)" srcSet={`${logoBase}/icon.png`} />
+              <source media="(max-width: 768px)" srcSet={`${logoBase}/mobile.png`} />
+              <img
+                src={`${logoBase}/header.png`}
+                alt="VETPAL – Veterans Empowered To Protect Aquatic Life"
+                className="h-16 w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform"
+                loading="lazy"
+              />
+            </picture>
           </Link>
 
           {/* Desktop Navigation */}
@@ -132,12 +153,34 @@ export function Header() {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant="ghost" size="sm" asChild>
-              <Link to="/sign-in">Sign In</Link>
-            </Button>
-            <Button variant="outline" size="sm" asChild>
-              <Link to="/create-account">Create Account</Link>
-            </Button>
+            <ThemeToggle />
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center">
+                      <User className="w-4 h-4 text-accent" />
+                    </div>
+                    <span className="max-w-[100px] truncate">{user.email?.split('@')[0]}</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem className="text-muted-foreground text-sm">
+                    {user.email}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut} className="text-destructive cursor-pointer">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/auth">Sign In</Link>
+              </Button>
+            )}
             <Button variant="accent" size="default" asChild>
               <Link to="/donate" className="flex items-center gap-2">
                 <Heart className="w-4 h-4" />
@@ -189,12 +232,21 @@ export function Header() {
                 </div>
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border mt-2">
-                <Button variant="outline" asChild className="w-full">
-                  <Link to="/sign-in">Sign In</Link>
-                </Button>
-                <Button variant="outline" asChild className="w-full">
-                  <Link to="/create-account">Create Account</Link>
-                </Button>
+                {user ? (
+                  <>
+                    <div className="px-4 py-2 text-sm text-muted-foreground">
+                      Signed in as {user.email}
+                    </div>
+                    <Button variant="outline" onClick={handleSignOut} className="w-full">
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <Button variant="outline" asChild className="w-full">
+                    <Link to="/auth">Sign In</Link>
+                  </Button>
+                )}
                 <Button variant="accent" asChild className="w-full">
                   <Link to="/donate" className="flex items-center justify-center gap-2">
                     <Heart className="w-4 h-4" />

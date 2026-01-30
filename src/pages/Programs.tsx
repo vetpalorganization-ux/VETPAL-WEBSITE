@@ -34,7 +34,7 @@ const programs = [
       'Background check clearance',
     ],
     stats: {
-      participants: '1,200+',
+      participants: '170+',
       placement: '85%',
       wellness: '98%',
     },
@@ -60,9 +60,9 @@ const programs = [
       'Must attend safety orientation',
     ],
     stats: {
-      projects: '150+',
-      debris: '75K lbs',
-      sites: '25',
+      projects: '90+',
+      debris: '13,000+ lbs',
+      sites: '7',
     },
   },
   {

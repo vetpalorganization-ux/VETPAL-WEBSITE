@@ -67,15 +67,15 @@ export function HeroSection() {
               <div className="flex justify-center mb-3">
                 <Users className="w-8 h-8 text-accent" />
               </div>
-              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">2,500+</div>
-              <div className="text-sm text-muted-foreground">Veterans Served</div>
+              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">170+</div>
+              <div className="text-sm text-muted-foreground">Veterans served</div>
             </div>
             <div className="glass-card p-6 text-center hover-lift">
               <div className="flex justify-center mb-3">
                 <Waves className="w-8 h-8 text-accent" />
               </div>
-              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">150+</div>
-              <div className="text-sm text-muted-foreground">Cleanup Events</div>
+              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">90+</div>
+              <div className="text-sm text-muted-foreground">Cleanup events</div>
             </div>
             <div className="glass-card p-6 text-center hover-lift">
               <div className="flex justify-center mb-3">
@@ -83,8 +83,8 @@ export function HeroSection() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
                 </svg>
               </div>
-              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">75K</div>
-              <div className="text-sm text-muted-foreground">Lbs Debris Removed</div>
+              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">13,000+</div>
+              <div className="text-sm text-muted-foreground">lbs of cleanup debris</div>
             </div>
             <div className="glass-card p-6 text-center hover-lift">
               <div className="flex justify-center mb-3">
@@ -93,8 +93,8 @@ export function HeroSection() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">25</div>
-              <div className="text-sm text-muted-foreground">Coastal Locations</div>
+              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">7</div>
+              <div className="text-sm text-muted-foreground">waterways cleaned</div>
             </div>
           </div>
         </div>

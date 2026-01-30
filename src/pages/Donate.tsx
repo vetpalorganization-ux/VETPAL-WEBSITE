@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { 
-  Heart, 
+import { toast } from 'sonner';
+import {
+  Heart,
   ArrowRight,
   CheckCircle,
   Shield,
@@ -207,14 +208,17 @@ export default function DonatePage() {
               </div>
 
               {/* Submit Button */}
-              <Button 
-                variant="hero" 
-                className="w-full" 
-                disabled={!finalAmount || finalAmount < 1}
+              <a
+                href={donationType === 'monthly'
+                  ? 'https://buy.stripe.com/5kQaEYd5A1kIgFV7NdbAs02'
+                  : 'https://donate.stripe.com/00w5kE1mS7J6dtJ1oPbAs01'}
+                className={`inline-flex items-center justify-center gap-2 w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg hover:shadow-accent hover:-translate-y-1 text-base px-8 py-6 rounded-xl font-semibold transition-all duration-300 ${
+                  !finalAmount || finalAmount < 5 ? 'pointer-events-none opacity-50' : ''
+                }`}
               >
                 {donationType === 'monthly' ? 'Give' : 'Donate'} ${finalAmount || 0}{donationType === 'monthly' ? '/month' : ''}
                 <ArrowRight className="w-5 h-5" />
-              </Button>
+              </a>
 
               {/* Security Notice */}
               <div className="flex items-center justify-center gap-2 mt-6 text-sm text-muted-foreground">

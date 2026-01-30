@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Mail, Lock, User, Shield, Users, Heart } from 'lucide-react';
+import { Mail, Lock, User, Shield, Users, Heart, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { toast } from 'sonner';
 
 type Role = 'veteran' | 'volunteer' | 'donor' | null;
 
@@ -15,18 +18,54 @@ const CreateAccount = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [selectedRole, setSelectedRole] = useState<Role>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { signUp } = useAuth();
+  const navigate = useNavigate();
+  const { theme } = useTheme();
+  const logoTheme = theme === 'dark' ? 'light' : 'dark';
+  const logoBase = `/assets/branding/logos/${logoTheme}`;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement registration
-    console.log('Create account:', {
-      firstName,
-      lastName,
-      email,
-      password,
-      confirmPassword,
-      role: selectedRole,
-    });
+    
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+
+    if (!selectedRole) {
+      toast.error('Please select a role');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const { error } = await signUp(
+        email,
+        password,
+        firstName,
+        lastName,
+        [selectedRole]
+      );
+
+      if (error) {
+        let errorMessage = error.message;
+        if (error.message.includes('already registered')) {
+          errorMessage = 'This email is already registered. Please sign in instead.';
+        }
+        toast.error('Signup failed', { description: errorMessage });
+      } else {
+        toast.success('Account created!', {
+          description: 'Welcome to VETPAL. You are now signed in.',
+        });
+        navigate('/');
+      }
+    } catch (error) {
+      toast.error('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const roles = [
@@ -57,7 +96,11 @@ const CreateAccount = () => {
         <div className="max-w-md mx-auto">
           {/* Logo */}
           <div className="flex items-center justify-center w-20 h-20 bg-teal-500 rounded-2xl mb-8">
-            <span className="text-4xl font-bold text-white">V</span>
+            <img
+              src={`${logoBase}/header.png`}
+              alt="VETPAL – Veterans Empowered To Protect Aquatic Life"
+              className="h-12 w-auto object-contain"
+            />
           </div>
 
           {/* Heading */}
@@ -133,6 +176,7 @@ const CreateAccount = () => {
                     onChange={(e) => setFirstName(e.target.value)}
                     className="pl-10 bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500 focus:ring-teal-500"
                     required
+                    disabled={isLoading}
                   />
                 </div>
               </div>
@@ -148,6 +192,7 @@ const CreateAccount = () => {
                   onChange={(e) => setLastName(e.target.value)}
                   className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500 focus:ring-teal-500"
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -167,6 +212,7 @@ const CreateAccount = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10 bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500 focus:ring-teal-500"
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -187,6 +233,7 @@ const CreateAccount = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     className="pl-10 bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500 focus:ring-teal-500"
                     required
+                    disabled={isLoading}
                   />
                 </div>
               </div>
@@ -202,6 +249,7 @@ const CreateAccount = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-teal-500 focus:ring-teal-500"
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -220,12 +268,14 @@ const CreateAccount = () => {
                       key={role.id}
                       type="button"
                       onClick={() => setSelectedRole(role.id)}
+                      disabled={isLoading}
                       className={cn(
                         'w-full p-4 rounded-lg border-2 transition-all text-left',
                         'hover:border-teal-500/50',
                         isSelected
                           ? 'border-teal-500 bg-teal-500/10'
-                          : 'border-slate-700 bg-slate-900'
+                          : 'border-slate-700 bg-slate-900',
+                        isLoading && 'opacity-50 cursor-not-allowed'
                       )}
                     >
                       <div className="flex items-start gap-3">
@@ -266,9 +316,16 @@ const CreateAccount = () => {
             <Button
               type="submit"
               className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-6 text-lg"
-              disabled={!selectedRole}
+              disabled={!selectedRole || isLoading}
             >
-              Create Account
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Creating Account...
+                </>
+              ) : (
+                'Create Account'
+              )}
             </Button>
 
             {/* Terms */}
