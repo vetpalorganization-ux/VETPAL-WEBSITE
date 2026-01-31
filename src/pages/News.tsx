@@ -144,7 +144,16 @@ export default function News() {
     <Layout>
       <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
         {/* Header */}
-        <div className="bg-primary text-primary-foreground py-16 relative overflow-hidden">
+        <div className="bg-primary text-white h-[520px] md:h-[750px] flex items-center relative overflow-hidden">
+          <div className="absolute inset-0">
+            <img
+              src="/assets/images/oil-spill.jpg"
+              alt=""
+              aria-hidden="true"
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-900/55 to-slate-950/85" />
+          </div>
           <div className="absolute inset-0 bg-[url('/ocean-pattern.svg')] opacity-10"></div>
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
@@ -152,7 +161,7 @@ export default function News() {
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 News & Stories
               </h1>
-              <p className="text-xl text-primary-foreground/90">
+              <p className="text-xl text-white/80">
                 Read the latest updates from VETPAL, including impact stories, conservation news,
                 veteran spotlights, and program announcements.
               </p>

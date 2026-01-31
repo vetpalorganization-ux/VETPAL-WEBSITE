@@ -17,7 +17,7 @@ export default function DonorPrivacy() {
               Our commitment to protecting the privacy and trust of our generous donors.
             </p>
             <p className="text-sm text-primary-foreground/70 mt-4">
-              Last Updated: December 23, 2025
+              Last Updated: January 2026
             </p>
           </div>
         </div>
@@ -100,6 +100,24 @@ export default function DonorPrivacy() {
             </CardContent>
           </Card>
 
+          {/* Consent & Legal Basis */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Consent & Legal Basis</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p className="text-muted-foreground">
+                By donating or signing up for updates, you explicitly consent to VETPAL collecting and using your personal
+                information for the purposes described in this policy. We also process donor information to fulfill legal
+                obligations such as issuing tax receipts and maintaining required records.
+              </p>
+              <p className="text-muted-foreground">
+                Marketing communications are sent only to donors and supporters who have opted in. You may update your
+                communication preferences at any time.
+              </p>
+            </CardContent>
+          </Card>
+
           {/* How We Use Donor Information */}
           <Card>
             <CardHeader>
@@ -120,7 +138,7 @@ export default function DonorPrivacy() {
                   <h4 className="font-semibold mb-1">Issue Tax Receipts</h4>
                   <p className="text-sm text-muted-foreground">
                     To provide you with official donation receipts for tax purposes as required by the IRS. VETPAL is a
-                    501(c)(3) nonprofit organization (EIN: XX-XXXXXXX).
+                    501(c)(3) nonprofit organization (EIN: 99-2108558).
                   </p>
                 </div>
 
@@ -239,6 +257,10 @@ export default function DonorPrivacy() {
                     communications (email service providers), and maintain our database. These providers are contractually
                     obligated to keep your information confidential and use it only for the services they provide to us.
                   </p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    All vendors handling donor data are contractually required to meet privacy and security standards,
+                    and VETPAL conducts due diligence to verify these controls.
+                  </p>
                 </div>
 
                 <div className="p-4 bg-muted/50 rounded-lg">
@@ -272,34 +294,20 @@ export default function DonorPrivacy() {
               <p className="text-muted-foreground">As a VETPAL donor, you have the right to:</p>
 
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>
-                  <strong>Opt Out of Communications:</strong> You may unsubscribe from fundraising appeals, newsletters,
-                  and other communications at any time by clicking "unsubscribe" in any email or contacting us directly.
-                </li>
-                <li>
-                  <strong>Request Anonymity:</strong> You may request that your donation be kept anonymous and not be
-                  publicly recognized.
-                </li>
-                <li>
-                  <strong>Access Your Information:</strong> You may request a copy of the donor information we have on file for you.
-                </li>
-                <li>
-                  <strong>Correct Your Information:</strong> You may request corrections to your donor record, including
-                  contact information and communication preferences.
-                </li>
-                <li>
-                  <strong>Cancel Recurring Donations:</strong> You may cancel recurring donations at any time through your
-                  donor portal or by contacting us.
-                </li>
-                <li>
-                  <strong>Delete Your Information:</strong> You may request deletion of your donor information, subject to
-                  legal retention requirements (we must retain tax-related records for 7 years per IRS regulations).
-                </li>
+                <li><strong>Access:</strong> Request a copy of the donor information we have on file for you.</li>
+                <li><strong>Correct:</strong> Request corrections to your donor record, including contact information and preferences.</li>
+                <li><strong>Delete:</strong> Request deletion of your donor information, subject to legal retention requirements.</li>
+                <li><strong>Restrict Processing:</strong> Ask us to limit how we use your information in certain circumstances.</li>
+                <li><strong>Data Portability:</strong> Request a portable copy of your donor data.</li>
+                <li><strong>Opt Out of Communications:</strong> Unsubscribe from fundraising appeals, newsletters, and other communications at any time.</li>
+                <li><strong>Request Anonymity:</strong> Ask that your donation be kept anonymous and not publicly recognized.</li>
+                <li><strong>Cancel Recurring Donations:</strong> Cancel recurring donations at any time through your donor portal or by contacting us.</li>
               </ul>
 
               <p className="text-muted-foreground mt-4">
                 To exercise any of these rights, please contact us at{" "}
-                <a href="mailto:donor.privacy@vetpal.org" className="text-accent hover:underline">donor.privacy@vetpal.org</a>
+                <a href="mailto:donor.privacy@vetpal.org" className="text-accent hover:underline">donor.privacy@vetpal.org</a>.
+                Requests will be fulfilled within 30 days where applicable.
               </p>
             </CardContent>
           </Card>
@@ -347,7 +355,8 @@ export default function DonorPrivacy() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-3">
-                We retain donor information according to the following guidelines:
+                We collect only the data necessary for the purposes described in this policy and regularly review and
+                purge information that is no longer needed. We retain donor information according to the following guidelines:
               </p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                 <li><strong>Tax Records:</strong> Donation records are retained for at least 7 years as required by IRS regulations</li>
@@ -355,6 +364,37 @@ export default function DonorPrivacy() {
                 <li><strong>Lapsed Donors:</strong> Information for donors who have not given in 5+ years may be archived or deleted upon request</li>
                 <li><strong>Recurring Donors:</strong> Records are maintained as long as the recurring donation is active, plus 7 years after cancellation</li>
               </ul>
+            </CardContent>
+          </Card>
+
+          {/* Breach Notification */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Breach Notification</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                In the event of a data breach involving donor information, VETPAL will notify affected donors using email
+                and/or other reasonable communication methods as soon as practicable, and in accordance with applicable
+                legal requirements.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Website Tracking & Cookies */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Website Tracking & Cookies</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p className="text-muted-foreground">
+                Our website uses analytics and cookies to understand site performance and improve the donor experience.
+                You can control cookie preferences through your browser settings and opt out of non-essential tracking where available.
+              </p>
+              <p className="text-muted-foreground">
+                For more information, please review our{" "}
+                <a href="/cookies" className="text-accent hover:underline">Cookie Policy</a>.
+              </p>
             </CardContent>
           </Card>
 
@@ -403,8 +443,8 @@ export default function DonorPrivacy() {
               <div className="space-y-2 text-muted-foreground">
                 <p><strong>Donor Privacy Contact</strong></p>
                 <p>Email: <a href="mailto:donor.privacy@vetpal.org" className="text-accent hover:underline">donor.privacy@vetpal.org</a></p>
-                <p>Phone: (555) 123-4567</p>
-                <p>Mail: VETPAL, Attn: Donor Privacy, 123 Ocean Boulevard, Suite 100, San Diego, CA 92101</p>
+                <p>Phone: 214-205-8177</p>
+                <p>Mail: VETPAL Corp, Attn: Donor Privacy, 2931 Ridge Rd., Suite 101 Room 713, Rockwall, TX 75032</p>
               </div>
               <div className="mt-6 p-4 bg-accent/10 rounded-lg border border-accent/20">
                 <p className="text-sm text-muted-foreground">
@@ -413,6 +453,9 @@ export default function DonorPrivacy() {
                   excellent stewards of your gift.
                 </p>
               </div>
+              <p className="text-xs text-muted-foreground mt-4">
+                Last revised: January 2026. This policy is reviewed annually.
+              </p>
             </CardContent>
           </Card>
         </div>

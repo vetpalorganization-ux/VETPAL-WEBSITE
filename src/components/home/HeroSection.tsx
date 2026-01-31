@@ -1,12 +1,24 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, Shield, Waves, Users } from 'lucide-react';
+import { ArrowRight, Calendar, Play, Shield, TrendingUp, Waves, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+    <section className="relative h-[520px] md:h-[750px] flex items-center overflow-hidden text-white">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-ocean" />
+      <div className="absolute inset-0">
+        <video
+          className="w-full h-full object-cover object-center"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+        >
+          <source src="/assets/videos/vetpal-commercial-part1.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/75 via-slate-900/65 to-slate-950/85" />
+      </div>
       
       {/* Animated Wave Pattern */}
       <div className="absolute inset-0 opacity-10">
@@ -28,19 +40,19 @@ export function HeroSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-8 animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-8 animate-fade-up">
             <Shield className="w-4 h-4 text-accent" />
-            <span className="text-sm font-medium text-accent">501(c)(3) Nonprofit Organization</span>
+            <span className="text-sm font-medium text-white">501(c)(3) Nonprofit Organization</span>
           </div>
 
           {/* Headline */}
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-up" style={{ animationDelay: '0.1s' }}>
             Veterans Empowered to{' '}
-            <span className="gradient-text">Protect Aquatic Life</span>
+            <span className="text-accent">Protect Aquatic Life</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg sm:text-xl text-foreground/80 mb-10 max-w-2xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-lg sm:text-xl text-white/80 mb-10 max-w-2xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
             We unite veterans in meaningful marine conservation work, providing purpose, 
             community, and healing through protecting our oceans and coastal ecosystems.
           </p>
@@ -60,6 +72,14 @@ export function HeroSection() {
               </Link>
             </Button>
           </div>
+          <p className="text-xs sm:text-sm text-white/70 max-w-2xl mx-auto mb-10">
+            VETPAL is a 501(c)(3) nonprofit. EIN: 99-2108558. Donations are tax-deductible to the extent allowed by law.
+            Donor privacy is protected under our{" "}
+            <Link to="/donor-privacy" className="underline underline-offset-2 text-white/90 hover:text-white">
+              Donor Privacy Policy
+            </Link>
+            .
+          </p>
 
           {/* Stats Row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 animate-fade-up" style={{ animationDelay: '0.4s' }}>
@@ -67,34 +87,32 @@ export function HeroSection() {
               <div className="flex justify-center mb-3">
                 <Users className="w-8 h-8 text-accent" />
               </div>
-              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">170+</div>
-              <div className="text-sm text-muted-foreground">Veterans served</div>
+              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground dark:text-white mb-1">13</div>
+              <div className="text-sm text-muted-foreground dark:text-white/70">Veterans Served</div>
+              <div className="text-xs text-muted-foreground/80 dark:text-white/60">Since 2024</div>
             </div>
             <div className="glass-card p-6 text-center hover-lift">
               <div className="flex justify-center mb-3">
                 <Waves className="w-8 h-8 text-accent" />
               </div>
-              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">90+</div>
-              <div className="text-sm text-muted-foreground">Cleanup events</div>
+              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground dark:text-white mb-1">7</div>
+              <div className="text-sm text-muted-foreground dark:text-white/70">Waterways Cleaned</div>
+              <div className="text-xs text-muted-foreground/80 dark:text-white/60">Since 2024</div>
             </div>
             <div className="glass-card p-6 text-center hover-lift">
               <div className="flex justify-center mb-3">
-                <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-                </svg>
+                <Calendar className="w-8 h-8 text-accent" />
               </div>
-              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">13,000+</div>
-              <div className="text-sm text-muted-foreground">lbs of cleanup debris</div>
+              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground dark:text-white mb-1">43</div>
+              <div className="text-sm text-muted-foreground dark:text-white/70">Cleanup Events</div>
+              <div className="text-xs text-muted-foreground/80 dark:text-white/60">Since 2024</div>
             </div>
             <div className="glass-card p-6 text-center hover-lift">
               <div className="flex justify-center mb-3">
-                <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
+                <TrendingUp className="w-8 h-8 text-accent" />
               </div>
-              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-1">7</div>
-              <div className="text-sm text-muted-foreground">waterways cleaned</div>
+              <div className="font-heading text-3xl md:text-4xl font-bold text-foreground dark:text-white mb-1">13k+</div>
+              <div className="text-sm text-muted-foreground dark:text-white/70">13k+ lbs of cleanup debris</div>
             </div>
           </div>
         </div>

@@ -12,15 +12,6 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 const STORAGE_KEY = 'vetpal-theme';
 
 function getInitialTheme(): Theme {
-  // 1) localStorage
-  const stored = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
-  if (stored === 'light' || stored === 'dark') return stored;
-  // 2) system preference
-  if (typeof window !== 'undefined' && window.matchMedia) {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return prefersDark ? 'dark' : 'light';
-  }
-  // 3) fallback
   return 'dark';
 }
 

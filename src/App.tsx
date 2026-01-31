@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 // Public pages
 import Index from "./pages/Index";
@@ -23,6 +24,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
 import DonorPrivacy from "./pages/DonorPrivacy";
+import ExecutiveSummary from "./pages/ExecutiveSummary";
 import Events from "./pages/Events";
 import Careers from "./pages/Careers";
 import Apply from "./pages/Apply";
@@ -59,6 +61,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             {/* Public pages */}
             <Route path="/" element={<Index />} />
@@ -77,6 +80,7 @@ const App = () => (
             <Route path="/terms" element={<Terms />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/donor-privacy" element={<DonorPrivacy />} />
+            <Route path="/executive-summary" element={<ExecutiveSummary />} />
             <Route path="/events" element={<Events />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/apply/:type" element={<Apply />} />

@@ -3,7 +3,6 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { PageHeader } from "@/components/admin/PageHeader";
-import { StatusBadge } from "@/components/admin/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,33 +13,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Plus, Pencil, Trash2, MapPin, Globe, Users } from "lucide-react";
+import { Plus, Pencil, Trash2, MapPin } from "lucide-react";
 import { format, isPast } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
 
 interface Event {
   id: string;
   title: string;
-  slug: string;
   description: string | null;
-  event_date: string;
-  event_time: string | null;
-  end_date: string | null;
+  date: string;
+  time: string | null;
   location: string | null;
-  location_type: string | null;
-  virtual_url: string | null;
-  registration_url: string | null;
-  capacity: number | null;
-  status: string | null;
   created_at: string;
 }
 
@@ -52,17 +37,10 @@ export default function AdminEvents() {
   const [activeTab, setActiveTab] = useState("upcoming");
   const [formData, setFormData] = useState({
     title: "",
-    slug: "",
     description: "",
-    event_date: "",
-    event_time: "",
-    end_date: "",
+    date: "",
+    time: "",
     location: "",
-    location_type: "in-person",
-    virtual_url: "",
-    registration_url: "",
-    capacity: "",
-    status: "draft",
   });
 
   const { data: events, isLoading } = useQuery({
@@ -71,35 +49,24 @@ export default function AdminEvents() {
       const { data, error } = await supabase
         .from("events")
         .select("*")
-        .order("event_date", { ascending: true });
+        .order("date", { ascending: true });
 
       if (error) throw error;
       return data as Event[];
     },
   });
 
-  const upcomingEvents = events?.filter(
-    (e) => !isPast(new Date(e.event_date)) || e.status === "draft"
-  );
-  const pastEvents = events?.filter(
-    (e) => isPast(new Date(e.event_date)) && e.status !== "draft"
-  );
+  const upcomingEvents = events?.filter((e) => !isPast(new Date(e.date)));
+  const pastEvents = events?.filter((e) => isPast(new Date(e.date)));
 
   const createMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
       const { error } = await supabase.from("events").insert({
         title: data.title,
-        slug: data.slug || data.title.toLowerCase().replace(/\s+/g, "-"),
         description: data.description,
-        event_date: data.event_date,
-        event_time: data.event_time || null,
-        end_date: data.end_date || null,
+        date: data.date,
+        time: data.time || null,
         location: data.location,
-        location_type: data.location_type,
-        virtual_url: data.virtual_url || null,
-        registration_url: data.registration_url || null,
-        capacity: data.capacity ? parseInt(data.capacity) : null,
-        status: data.status,
       });
       if (error) throw error;
     },
@@ -123,17 +90,10 @@ export default function AdminEvents() {
         .from("events")
         .update({
           title: data.title,
-          slug: data.slug,
           description: data.description,
-          event_date: data.event_date,
-          event_time: data.event_time || null,
-          end_date: data.end_date || null,
+          date: data.date,
+          time: data.time || null,
           location: data.location,
-          location_type: data.location_type,
-          virtual_url: data.virtual_url || null,
-          registration_url: data.registration_url || null,
-          capacity: data.capacity ? parseInt(data.capacity) : null,
-          status: data.status,
         })
         .eq("id", id);
       if (error) throw error;
@@ -173,17 +133,10 @@ export default function AdminEvents() {
   const resetForm = () => {
     setFormData({
       title: "",
-      slug: "",
       description: "",
-      event_date: "",
-      event_time: "",
-      end_date: "",
+      date: "",
+      time: "",
       location: "",
-      location_type: "in-person",
-      virtual_url: "",
-      registration_url: "",
-      capacity: "",
-      status: "draft",
     });
     setEditingEvent(null);
     setIsDialogOpen(false);
@@ -193,17 +146,10 @@ export default function AdminEvents() {
     setEditingEvent(event);
     setFormData({
       title: event.title,
-      slug: event.slug,
       description: event.description || "",
-      event_date: event.event_date,
-      event_time: event.event_time || "",
-      end_date: event.end_date || "",
+      date: event.date,
+      time: event.time || "",
       location: event.location || "",
-      location_type: event.location_type || "in-person",
-      virtual_url: event.virtual_url || "",
-      registration_url: event.registration_url || "",
-      capacity: event.capacity?.toString() || "",
-      status: event.status || "draft",
     });
     setIsDialogOpen(true);
   };
@@ -223,9 +169,6 @@ export default function AdminEvents() {
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
             <h3 className="font-semibold text-lg">{event.title}</h3>
-            <StatusBadge
-              status={event.status as "draft" | "published" | "cancelled"}
-            />
           </div>
           {event.description && (
             <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
@@ -234,25 +177,13 @@ export default function AdminEvents() {
           )}
           <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
             <span className="flex items-center gap-1">
-              📅 {format(new Date(event.event_date), "MMM d, yyyy")}
-              {event.event_time && ` at ${event.event_time}`}
+              📅 {format(new Date(event.date), "MMM d, yyyy")}
+              {event.time && ` at ${event.time}`}
             </span>
             {event.location && (
               <span className="flex items-center gap-1">
                 <MapPin className="w-3 h-3" />
                 {event.location}
-              </span>
-            )}
-            {event.location_type === "virtual" && (
-              <span className="flex items-center gap-1">
-                <Globe className="w-3 h-3" />
-                Virtual
-              </span>
-            )}
-            {event.capacity && (
-              <span className="flex items-center gap-1">
-                <Users className="w-3 h-3" />
-                {event.capacity} capacity
               </span>
             )}
           </div>
@@ -304,28 +235,16 @@ export default function AdminEvents() {
                 </DialogTitle>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="title">Title</Label>
-                    <Input
-                      id="title"
-                      value={formData.title}
-                      onChange={(e) =>
-                        setFormData({ ...formData, title: e.target.value })
-                      }
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="slug">Slug</Label>
-                    <Input
-                      id="slug"
-                      value={formData.slug}
-                      onChange={(e) =>
-                        setFormData({ ...formData, slug: e.target.value })
-                      }
-                    />
-                  </div>
+                <div className="space-y-2">
+                  <Label htmlFor="title">Title</Label>
+                  <Input
+                    id="title"
+                    value={formData.title}
+                    onChange={(e) =>
+                      setFormData({ ...formData, title: e.target.value })
+                    }
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="description">Description</Label>
@@ -340,65 +259,27 @@ export default function AdminEvents() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="event_date">Event Date</Label>
+                    <Label htmlFor="date">Event Date</Label>
                     <Input
-                      id="event_date"
+                      id="date"
                       type="date"
-                      value={formData.event_date}
+                      value={formData.date}
                       onChange={(e) =>
-                        setFormData({ ...formData, event_date: e.target.value })
+                        setFormData({ ...formData, date: e.target.value })
                       }
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="event_time">Time</Label>
+                    <Label htmlFor="time">Time</Label>
                     <Input
-                      id="event_time"
+                      id="time"
                       type="time"
-                      value={formData.event_time}
+                      value={formData.time}
                       onChange={(e) =>
-                        setFormData({ ...formData, event_time: e.target.value })
+                        setFormData({ ...formData, time: e.target.value })
                       }
                     />
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="location_type">Location Type</Label>
-                    <Select
-                      value={formData.location_type}
-                      onValueChange={(value) =>
-                        setFormData({ ...formData, location_type: value })
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="in-person">In Person</SelectItem>
-                        <SelectItem value="virtual">Virtual</SelectItem>
-                        <SelectItem value="hybrid">Hybrid</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="status">Status</Label>
-                    <Select
-                      value={formData.status}
-                      onValueChange={(value) =>
-                        setFormData({ ...formData, status: value })
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="draft">Draft</SelectItem>
-                        <SelectItem value="published">Published</SelectItem>
-                        <SelectItem value="cancelled">Cancelled</SelectItem>
-                      </SelectContent>
-                    </Select>
                   </div>
                 </div>
                 <div className="space-y-2">
@@ -409,46 +290,6 @@ export default function AdminEvents() {
                     onChange={(e) =>
                       setFormData({ ...formData, location: e.target.value })
                     }
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="virtual_url">Virtual URL</Label>
-                    <Input
-                      id="virtual_url"
-                      type="url"
-                      value={formData.virtual_url}
-                      onChange={(e) =>
-                        setFormData({ ...formData, virtual_url: e.target.value })
-                      }
-                      placeholder="https://zoom.us/..."
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="registration_url">Registration URL</Label>
-                    <Input
-                      id="registration_url"
-                      type="url"
-                      value={formData.registration_url}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          registration_url: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="capacity">Capacity</Label>
-                  <Input
-                    id="capacity"
-                    type="number"
-                    value={formData.capacity}
-                    onChange={(e) =>
-                      setFormData({ ...formData, capacity: e.target.value })
-                    }
-                    placeholder="Leave empty for unlimited"
                   />
                 </div>
                 <div className="flex justify-end gap-3">

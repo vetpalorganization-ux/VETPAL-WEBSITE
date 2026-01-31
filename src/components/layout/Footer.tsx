@@ -18,6 +18,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 const footerLinks = {
   organization: [
     { name: 'About Us', href: '/about' },
+    { name: 'Executive Summary', href: '/executive-summary' },
     { name: 'Our Team', href: '/about#team' },
     { name: 'Impact Report', href: '/about#impact' },
     { name: 'Financials', href: '/about#financials' },
@@ -61,13 +62,22 @@ export function Footer() {
       {/* Newsletter Section */}
       <div className="border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="glass-card p-8 md:p-12 bg-gradient-ocean">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="glass-card p-8 md:p-12 relative overflow-hidden text-white">
+            <div className="absolute inset-0">
+              <img
+                src="/assets/images/coral-reef.jpg"
+                alt=""
+                aria-hidden="true"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-slate-900/70 to-slate-950/85" />
+            </div>
+            <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-3">
+                <h3 className="font-heading text-2xl md:text-3xl font-bold text-white mb-3">
                   Join Our Mission
                 </h3>
-                <p className="text-foreground/80 text-lg">
+                <p className="text-white/80 text-lg">
                   Get updates on our conservation efforts and veteran programs. 
                   Be the first to know about upcoming events and campaigns.
                 </p>
@@ -77,7 +87,7 @@ export function Footer() {
                   <Input
                     type="email"
                     placeholder="Enter your email"
-                    className="flex-1 bg-background/10 border-border/30 text-foreground placeholder:text-foreground/50 h-12"
+                    className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-white/60 h-12"
                     required
                   />
                   <Button variant="accent" size="lg" className="whitespace-nowrap">
@@ -85,7 +95,7 @@ export function Footer() {
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </form>
-                <p className="text-foreground/60 text-sm mt-3">
+                <p className="text-white/60 text-sm mt-3">
                   By subscribing, you agree to our Privacy Policy. Unsubscribe anytime.
                 </p>
               </div>
@@ -118,13 +128,13 @@ export function Footer() {
                 <Mail className="w-4 h-4" />
                 <span>info@vetpal.org</span>
               </a>
-              <a href="tel:+18005551234" className="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors">
+              <a href="tel:+12142058177" className="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors">
                 <Phone className="w-4 h-4" />
-                <span>(800) 555-1234</span>
+                <span>214-205-8177</span>
               </a>
               <div className="flex items-start gap-3 text-muted-foreground">
                 <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
-                <span>123 Ocean Drive, Suite 100<br />San Diego, CA 92101</span>
+                <span>VETPAL Corp<br />2931 Ridge Rd.<br />Suite 101 Room 713<br />Rockwall, TX 75032</span>
               </div>
             </div>
 
@@ -238,7 +248,7 @@ export function Footer() {
           </div>
           <div className="text-center mt-4">
             <p className="text-xs text-muted-foreground">
-              VETPAL is a 501(c)(3) nonprofit organization. EIN: 12-3456789. Donations are tax-deductible to the extent allowed by law.
+              VETPAL is a 501(c)(3) nonprofit organization. EIN: 99-2108558. Donations are tax-deductible to the extent allowed by law.
             </p>
           </div>
         </div>

@@ -20,9 +20,10 @@ const navigation = [
     name: 'About', 
     href: '/about',
     children: [
-      { name: 'Our Mission', href: '/about' },
-      { name: 'Our Team', href: '/about#team' },
-      { name: 'Impact Report', href: '/about#impact' },
+      { name: 'Executive Summary', href: '/executive-summary' },
+      { name: 'Our Story', href: '/about' },
+      { name: 'Mission & Values', href: '/about#values' },
+      { name: 'Leadership / Board', href: '/about#team' },
     ]
   },
   { 

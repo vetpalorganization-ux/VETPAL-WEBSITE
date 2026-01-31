@@ -112,9 +112,8 @@ export default function AdminDashboard() {
       const { data, error } = await supabase
         .from("events")
         .select("*")
-        .gte("event_date", new Date().toISOString().split("T")[0])
-        .eq("status", "published")
-        .order("event_date", { ascending: true })
+        .gte("date", new Date().toISOString().split("T")[0])
+        .order("date", { ascending: true })
         .limit(3);
 
       if (error) throw error;
@@ -270,8 +269,8 @@ export default function AdminDashboard() {
                   <div className="flex items-center gap-2 mt-2 text-sm text-muted-foreground">
                     <Calendar className="w-4 h-4" />
                     <span>
-                      {format(new Date(event.event_date), "MMM d, yyyy")}
-                      {event.event_time && ` at ${event.event_time}`}
+                      {format(new Date(event.date), "MMM d, yyyy")}
+                      {event.time && ` at ${event.time}`}
                     </span>
                   </div>
                   {event.location && (

@@ -92,18 +92,19 @@ export default function Apply() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-background py-24">
-        <div className="container max-w-2xl mx-auto px-4">
-          <Button
-            variant="ghost"
-            className="mb-8 pl-0 hover:pl-2 transition-all"
-            onClick={() => navigate(-1)}
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back
-          </Button>
+      <div className="min-h-screen bg-background">
+        <section className="relative h-[520px] md:h-[750px] flex items-center overflow-hidden text-white">
+          <div className="absolute inset-0">
+            <img
+              src="/assets/images/river-cleanup.jpg"
+              alt=""
+              aria-hidden="true"
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/75 via-slate-900/65 to-slate-950/85" />
+          </div>
 
-          <div className="mb-8">
+          <div className="container max-w-3xl mx-auto px-4 relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
               {isVeteran ? (
                 <Shield className="w-4 h-4" />
@@ -112,44 +113,56 @@ export default function Apply() {
               )}
               {isVeteran ? 'For Veterans' : 'Get Involved'}
             </div>
-            <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h1 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
               {title}
             </h1>
-            <p className="text-lg text-muted-foreground">{subtitle}</p>
+            <p className="text-lg text-white/80">{subtitle}</p>
           </div>
+        </section>
 
-          <div className="glass-card p-6 md:p-8">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="full_name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Full Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="John Doe" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+        <section className="py-12 md:py-16">
+          <div className="container max-w-2xl mx-auto px-4">
+            <Button
+              variant="ghost"
+              className="mb-8 pl-0 hover:pl-2 transition-all"
+              onClick={() => navigate(-1)}
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
 
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input placeholder="john@example.com" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+            <div className="glass-card p-6 md:p-8">
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="full_name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Full Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="John Doe" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input placeholder="john@example.com" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <FormField
@@ -284,10 +297,11 @@ export default function Apply() {
                     'Submit Application'
                   )}
                 </Button>
-              </form>
-            </Form>
+                </form>
+              </Form>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </Layout>
   );

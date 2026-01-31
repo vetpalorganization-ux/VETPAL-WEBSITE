@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Heart, Users, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -30,6 +31,8 @@ const ctaCards = [
 ];
 
 export function CTASection() {
+  const [campaignView, setCampaignView] = useState<'results' | 'current'>('results');
+
   return (
     <section className="section-container bg-card relative overflow-hidden">
       {/* Background Pattern */}
@@ -89,43 +92,95 @@ export function CTASection() {
             </div>
           ))}
         </div>
+        <p className="mt-6 text-xs sm:text-sm text-muted-foreground max-w-3xl mx-auto text-center">
+          VETPAL is a 501(c)(3) nonprofit. EIN: 99-2108558. Donations are tax-deductible to the extent allowed by law.
+          Donor privacy is protected under our{" "}
+          <Link to="/donor-privacy" className="text-accent hover:underline">
+            Donor Privacy Policy
+          </Link>
+          .
+        </p>
 
-        {/* Urgency Banner */}
+        {/* Campaign Results + Current Year */}
         <div className="mt-12 glass-card p-6 md:p-8 bg-accent/5 border-accent/20">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center animate-pulse">
+              <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
                 <Heart className="w-6 h-6 text-accent" />
               </div>
               <div>
                 <h4 className="font-heading font-semibold text-foreground">
-                  2024 Year-End Campaign
+                  {campaignView === 'results' ? '2025 Annual Giving Campaign' : '2026 Annual Giving Campaign'}
                 </h4>
                 <p className="text-muted-foreground text-sm">
-                  Help us reach our goal of $100,000 by December 31st
+                  {campaignView === 'results'
+                    ? '2025 Results'
+                    : 'Current Year Campaign'}
                 </p>
               </div>
             </div>
-            
-            <div className="flex items-center gap-4">
-              <div className="text-right">
-                <div className="font-heading text-2xl font-bold text-accent">$67,450</div>
-                <div className="text-sm text-muted-foreground">of $100,000 raised</div>
-              </div>
-              <Button variant="accent" asChild>
-                <Link to="/campaigns/year-end-2024">
-                  Contribute
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
+
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setCampaignView('results')}
+                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wide border transition ${
+                  campaignView === 'results'
+                    ? 'bg-accent text-accent-foreground border-accent'
+                    : 'border-border text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                2025 Results
+              </button>
+              <button
+                type="button"
+                onClick={() => setCampaignView('current')}
+                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wide border transition ${
+                  campaignView === 'current'
+                    ? 'bg-accent text-accent-foreground border-accent'
+                    : 'border-border text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                2026 Campaign
+              </button>
             </div>
           </div>
-          
+
+          <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            {campaignView === 'results' ? (
+              <>
+                <div className="text-left">
+                  <div className="font-heading text-2xl font-bold text-accent">$942,572</div>
+                  <div className="text-sm text-muted-foreground">of $2,000,000 goal</div>
+                </div>
+                <Button variant="accent" asChild>
+                  <Link to="/campaigns">
+                    View 2025 Results
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+              </>
+            ) : (
+              <>
+                <div className="text-left">
+                  <div className="font-heading text-2xl font-bold text-accent">2026 Annual Giving Campaign</div>
+                  <div className="text-sm text-muted-foreground">Fundraising in progress</div>
+                </div>
+                <Button variant="accent" asChild>
+                  <Link to="/donate">
+                    Contribute
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+              </>
+            )}
+          </div>
+
           {/* Progress Bar */}
           <div className="mt-6 h-2 bg-muted rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-accent rounded-full transition-all duration-1000"
-              style={{ width: '67.45%' }}
+            <div
+              className="h-full bg-accent rounded-full transition-all duration-700"
+              style={{ width: campaignView === 'results' ? '47.13%' : '0%' }}
             />
           </div>
         </div>

@@ -15,7 +15,7 @@ export default function NewsDetail() {
     slug: "coral-restoration-initiative",
     title: "VETPAL Launches Coral Restoration Initiative",
     excerpt: "Our veteran teams are partnering with conservation organizations to protect and restore coral reefs in the Florida Keys.",
-    image: "/placeholder.svg",
+    image: "/assets/images/salvage.jpg",
     category: "Conservation",
     author: {
       name: "Sarah Johnson",
@@ -162,13 +162,13 @@ export default function NewsDetail() {
     <Layout>
       <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
         {/* Hero Image */}
-        <div className="relative h-[500px] bg-muted">
+        <div className="relative h-[520px] md:h-[750px] bg-muted">
           <img
             src={article.image}
             alt={article.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/45 to-transparent" />
         </div>
 
         {/* Article Header */}

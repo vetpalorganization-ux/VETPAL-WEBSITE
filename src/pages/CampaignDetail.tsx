@@ -31,7 +31,7 @@ export default function CampaignDetail() {
 This campaign funds three critical areas: veteran training and certification programs, active marine conservation projects, and mental health support services for our veteran community.
 
 Your donation will directly enable us to train 50 more veterans in marine conservation careers, remove 10,000 pounds of debris from our oceans, and restore a full acre of endangered coral reef in the Florida Keys.`,
-    image: "/placeholder.svg",
+    image: "/assets/images/turtle-rescue.jpg",
     goal: 150000,
     raised: 127500,
     donors: 423,
@@ -145,13 +145,13 @@ Your donation will directly enable us to train 50 more veterans in marine conser
     <Layout>
       <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
         {/* Hero Image */}
-        <div className="relative h-[400px] bg-muted">
+        <div className="relative h-[520px] md:h-[750px] bg-muted">
           <img
             src={campaign.image}
             alt={campaign.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/45 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-8">
             <div className="container mx-auto">
               <Badge className="mb-4">{campaign.category}</Badge>

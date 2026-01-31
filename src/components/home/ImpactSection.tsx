@@ -4,10 +4,10 @@ import { TrendingUp, Users, MapPin, Calendar } from 'lucide-react';
 const stats = [
   {
     icon: Users,
-    value: 170,
-    suffix: '+',
+    value: 13,
+    suffix: '',
     label: 'Veterans Served',
-    description: 'Since our founding in September 2024',
+    description: 'Since our founding in 2024',
   },
   {
     icon: MapPin,
@@ -18,18 +18,18 @@ const stats = [
   },
   {
     icon: TrendingUp,
-    value: 13000,
-    suffix: '+',
+    value: 13,
+    suffix: 'k+',
     label: 'lbs of cleanup debris',
     description: 'Removed from our oceans',
     format: true,
   },
   {
     icon: Calendar,
-    value: 90,
+    value: 43,
     suffix: '+',
     label: 'Cleanup events',
-    description: 'Hosted in 2024 alone',
+    description: 'Hosted since 2024.',
   },
 ];
 
@@ -151,14 +151,17 @@ export function ImpactSection() {
             </p>
             <footer className="flex items-center justify-center gap-4">
               <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
-                <span className="font-bold text-accent">JM</span>
+                <span className="font-bold text-accent">JH</span>
               </div>
               <div className="text-left">
                 <cite className="font-heading font-semibold text-foreground not-italic">
-                  James Mitchell
+                  James Hardinge
                 </cite>
                 <p className="text-sm text-muted-foreground">
-                  U.S. Marine Corps Veteran, VETPAL Program Graduate
+                  U.S. Army Major, Retired
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  VETPAL Program Coordinator
                 </p>
               </div>
             </footer>

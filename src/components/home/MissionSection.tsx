@@ -75,17 +75,12 @@ export function MissionSection() {
           {/* Visual */}
           <div className="relative">
             <div className="aspect-square rounded-3xl bg-gradient-card overflow-hidden border border-border/50">
-              {/* Placeholder for mission image */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-accent/20 flex items-center justify-center">
-                    <Compass className="w-12 h-12 text-accent" />
-                  </div>
-                  <p className="text-muted-foreground">
-                    Veterans and volunteers working together on coastal restoration
-                  </p>
-                </div>
-              </div>
+              <img
+                src="/assets/images/Vetpal-card-1.jpg"
+                alt="Veterans and volunteers working together on coastal restoration"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/10 via-transparent to-transparent" />
               
               {/* Decorative Elements */}
               <div className="absolute top-8 right-8 w-20 h-20 rounded-full bg-accent/10 animate-float" />

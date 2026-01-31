@@ -4,7 +4,8 @@ import { MissionSection } from '@/components/home/MissionSection';
 import { ProgramsSection } from '@/components/home/ProgramsSection';
 import { ImpactSection } from '@/components/home/ImpactSection';
 import { CTASection } from '@/components/home/CTASection';
-import { PartnersSection } from '@/components/home/PartnersSection';
+import { LeadershipSection } from '@/components/home/LeadershipSection';
+import { ComplianceSection } from '@/components/home/ComplianceSection';
 
 const Index = () => {
   return (
@@ -16,7 +17,9 @@ const Index = () => {
       <MissionSection />
       <ProgramsSection />
       <ImpactSection />
-      <PartnersSection />
+      {/* <PartnersSection /> */}
+      <LeadershipSection />
+      <ComplianceSection />
       <CTASection />
     </Layout>
   );
